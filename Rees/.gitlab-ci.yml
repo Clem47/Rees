@@ -1,0 +1,35 @@
+image: jakzal/phpqa:php8.2
+
+before_script:
+  - composer install
+cache:
+  paths:
+    - vendor/
+stages:
+  - SecurityChecker
+  - CodingStandards
+
+security-checker:
+  stage: SecurityChecker
+  script:
+    - symfony check:security
+  allow_failure: false
+
+phpcs:
+  stage: CodingStandards
+  script:
+    - ./vendor/bin/phpcs -v --standard=PSR12 --ignore=./src/Kernel.php ./src
+  allow_failure: false
+
+phpstan:
+  stage: CodingStandards
+  script:
+    - phpstan analyse ./src
+  allow_failure: false
+
+twig-lint:
+  stage: CodingStandards
+  script:
+    - symfony console lint:twig ./templates
+  allow_failure: false
+

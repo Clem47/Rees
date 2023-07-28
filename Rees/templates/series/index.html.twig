@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des series{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{{ asset('/css/allSeries.css') }}" type="text/css" rel="stylesheet">  
+    <link href="{{ asset('/css/paginationSeries.css') }}" type="text/css" rel="stylesheet">  
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <form class="searchBar text-white d-flex align-items-center "  method="get" action="{{ path('app_series_search' ) }}">
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Genre :</label>
+            <select class="form-control m-2  w-auto" data-mdb-filter="true" name="genres">
+            <option value=""> -- Genre -- </option>
+                {% for genre in allGenre %} 
+                    <option value="{{genre.name}}"> {{genre.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Année de début :</label>
+            <select aria-label="Default select example" class="form-control w-auto  m-2 " data-mdb-filter="true" name="yearStart">
+            <option value=""> -- Année de début -- </option>
+                {% for i in 1969..2023 %}
+                <option value="{{i}}"> {{i}}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Année de fin :</label>
+            <select class="form-control  m-2   w-auto" data-mdb-filter="true" name="yearEnd">
+                <option value=""> -- Année de fin -- </option>
+                {% for i in 1974..2023 %}
+                    <option value="{{i}}"> {{i}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Note min</label>
+            <select class="form-control  m-2   w-auto" data-mdb-filter="true" name="minUserRating">
+                <option value=""> -- Note -- </option>
+                {% for i in 0..5 %}
+                    <option value="{{i}}"> {{i}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Note max</label>
+            <select class="form-control  m-2   w-auto" data-mdb-filter="true" name="maxUserRating">
+                <option value=""> -- Note -- </option>
+                {% for i in 0..5 %}
+                    <option value="{{i}}"> {{i}}</option>
+                {% endfor %}
+            </select>
+        </div>    
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2 w-auto" >Ordre Notes</label>
+            <select class="form-control  m-2   w-auto" data-mdb-filter="true" name="orderRate">
+                <option value=""> Aucun ordre </option>
+                <option value="ASC"> Ordre croissant</option>
+                <option value="DESC"> Ordre décroissant</option>
+            </select>
+        </div>    
+        <div class="d-flex flex-column align-items-center">
+            <label class="m-2">Mots-clés : </label>
+            <input class="form-control w-auto m-2" type="text" name="keywords"  placeholder="Mots-clés">
+        </div>
+        <div class="d-flex flex-column align-items-end mt-4">
+              <button type="submit" class="btn btn-primary mt-3 ">Recherche</button>
+        </div>
+    </form>
+    <div class="action">
+		<a class="btn btn-light btn-lg m-5 px-4 followButton" href="{{ path('app_series_asc') }}" role='button'>
+		       Séries par ordre croissant
+        </a>
+		<a class="btn btn-light btn-lg m-5 px-4 followButton" href="{{ path('app_series_desc') }}" role='button'>
+		       Séries par ordre décroissant
+        </a>
+	</div>
+    </div>
+        {{ knp_pagination_render(series) }}
+        <div id="series" class="work_container  grid ">
+        {% for serie in series %}
+            <div class="d-flex flex-column">
+                <td> 
+                    <div class="series__filter AllPoster"> 
+                        <a href="{{ path('app_series_show', {'id': serie.id}) }}">
+                            <img src="{{ path('app_poster',{'id':serie.id }) }}">
+                        </a>
+                    </div>
+                    <div class="allGenre btn-group d-flex flex-row justify-content-evenly flex-wrap ">
+                            {% for genre in serie.genre %}
+                                {% if loop.index <= 4 %}
+                                    <p class="btn btn-outline-light btn-sm theGenre">{{ genre}}</p>    
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                </td>
+            </div>
+        {% endfor %}
+        </div>
+        {{ knp_pagination_render(series) }}
+{% endblock %}

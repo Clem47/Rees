@@ -1,0 +1,345 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ series.title }}
+{% endblock %}
+
+{% block stylesheets %}
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	    <script src="https://kit.fontawesome.com/2b4594a491.js" crossorigin="anonymous"></script>
+
+
+    <link href="{{ asset('/css/pagination.css') }}" type="text/css" rel="stylesheet">   
+	<link href="{{ asset('/css/show.css') }}" type="text/css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+	{{ parent() }}
+	<main class="d-flex flex-wrap">
+		<div class="info d-flex m-5  flex-wrap flex-column align-items-center">
+			<div class="LineOne d-flex flex-wrap m-5 align-items-center ">
+				<div class="firstPart d-flex flex-wrapm-5">
+					<img src="{{ path('app_poster',{'id':series.id}) }}">
+				</div>
+				<div class="d-flex flex-column flex-wrap secondPart">
+					<div class="title d-flex flex-wrap w-auto justify-content-center">
+						<h1 class="titleTxt w-auto">
+							{{ series.title }}
+						</h1>
+					</div>
+					<div class="m-2 d-flex flex-wrap flex-column">
+						<h3 class="border-0">Description
+						</h3>
+						<p class="border-0 w-auto h-auto">{{ series.plot }}</p>
+						{% if series.imdb %}
+							<h3 class="border-0">
+								Note(s)
+							</h3>
+							<a href="https://www.imdb.com/title/{{ series.imdb }}" target="_blank">
+								<h4>
+									Lien IMDB
+								</h4>
+							</a>
+							{% if reesRate|length > 0 and allRates|length > 0 %}
+								{% for rRate in reesRate %}
+									<p>
+										<b>
+											Note Rees :
+											{{ rRate.rate|number_format(1) }}</b>
+									</p>
+								{% endfor %}
+							{% else %}
+								<p>
+									<b>
+										Note Rees : Non noté</b>
+								</p>
+							{% endif %}
+						{% endif %}
+						{% if series.director %}
+							<h3 class="border-0">Directeur</h3>
+							<p class="border-0">{{ series.director }}</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="LineOne d-flex flex-wrap">
+				<div class="ThreePart m-5">
+					{% if series.awards %}
+						<h3 class="border-0"> Récompense(s)</h3>
+						<p class="border-0">{{ series.awards }}</p>
+					{% endif %}
+					{% if series.yearStart %}
+						<h3 class="border-0"> Année de début</h3>
+						<p class="border-0">{{ series.yearStart }}</p>
+					{% endif %}
+					{% if series.yearEnd %}
+						<h3 class="border-0">Année de fin</h3>
+						<p class="border-0">{{ series.yearEnd }}</p>
+					{% endif %}
+					{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+						<a type="button" class="btn btn-outline-light btn-lg px-4 followButton" href="{{ path('app_login') }}">Connecte toi pour suivre</a>
+						<br>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% if series.isLikedByUser(app.user) %}
+							<div>
+								<a type="button" class="btn btn-outline-light btn-lg px-4 followButton" href="{{ path('app_like_remove', {'id': series.id}) }}">Ne plus suivre</a>
+								<br>
+							</div>
+						{% else %}
+							<div>
+								<a type="button" class="btn btn-outline-light btn-lg px-4 followButton" href="{{ path('app_like_add', {'id': series.id}) }} ">Suivre</a>
+								<br>
+							</div>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="lastPart m-5">
+					<h3>
+						Episodes
+					</h3>
+					<div class="accordion w-70 d-flex flex-column" id="accordionExample">
+						{% for season in seasons %}
+							{% set watchEpisode = true %}
+							<div class="ouais d-flex flex-column justify-content-center m-1 mr-3 w-100 h-100">
+								{% set seasonEpisodes = episodes|filter(e => e.season.id == season.id) %}
+								{% if app.user %}
+									{% set watchedEpisodes = seasonEpisodes|filter(e => e.isWatchByUser(app.user)) %}
+									{% if watchedEpisodes|length == seasonEpisodes|length %}
+									<label class="switch">
+											<input type="checkbox" id="season{{ season.id }}" onchange="location.href='{{ path('app_WatchSeason_remove', {'idSeason': season.id}) }}'" checked>
+											<span class="slider round"></span>
+											</label>
+											<label for="season{{ season.id }}">Saison {{ season.number }} </label>
+									{% else %}
+										<label class="switch">
+										<input type="checkbox" id="season{{ season.id }}" onchange="location.href='{{ path('app_watchSeason_add', {'idSeason': season.id}) }}'">
+										<span class="slider round"></span>
+										</label>
+										<label for="season{{ season.id }}">Saison {{ season.number }} </label>
+
+									{% endif %}
+								{% endif %}
+							</div>
+							<button class="click btn " type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseWidthExample" aria-expanded="false" data-toggle="collapse" data-target="#multiCollapse{{season.number}}" aria-expanded="false" aria-controls="multiCollapse{{season.number}}">
+								Saison
+								{{season.number}}
+							</button>
+							<div class="col">
+								<div class="collapse multi-collapse w-70 bg-transparent border-0" id="multiCollapse{{season.number}}">
+									<div class="rounder card card-body bg-transparent border-0">
+										{% for episode in episodes %}
+											{% if episode.season.id == season.id %}
+												<div class="episode-info bg-white m-1 p-3">
+													<h4 class="text-dark font-weight-bold">
+														Episode
+														{{episode.number}}
+														// Titre :
+														{{episode.title}}
+													</h4>
+													{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+														{% if app.user %}
+															<div class="d-flex justify-content-between align-items-center">
+																{% if episode.isWatchByUser(app.user) %}
+																	<label class="switch">
+																		<input type="checkbox" id="episode{{ episode.id }}" onchange="location.href='{{ path('app_watch_remove', { 'idEpisode' : episode.id }) }}'" checked>
+																		<span class="slider round"></span>
+																		</label>
+																		<label for="episode{{ episode.id }}"></label>
+																	{% if watchEpisode == false %}
+																		{% set watchEpisode = true %}
+																		<div class="previous-episodes-question">
+																			<p class="text-dark">Voulez-vous marquer les épisodes précédents comme vu ?</p>
+																			<a href="{{ path('app_watch_previous_episodes', { 'numberPrevious': episode.number, 'season' : season.id}) }}" class="btn btn-primary">Oui</a>
+																			<button class="btn btn-light" onclick="$(this).parent().hide()">Non</button>
+																		</div>
+																	{% endif %}
+																{% else %}
+																	{% set watchEpisode = false %}
+																	<label class="switch">
+																		<input type="checkbox" id="episode{{ episode.id }}" onchange="location.href='{{ path('app_watch_add', { 'idEpisode' : episode.id}) }}'">
+																		<span class="slider round"></span>
+																		</label>
+																	<label for="episode{{ episode.id }}"></label>
+																{% endif %}
+															</div>
+														{% endif %}
+													{% endif %}
+												</div>
+											{% endif %}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+						 {% if series.youtubeTrailer %}
+                        <iframe width="auto" height="500" src={{ series.youtubeTrailer }} ></iframe>
+                    {% endif %}
+					</div>
+					<div class="lastPart m-5">
+						{% if myRate != null and is_granted('IS_AUTHENTICATED_FULLY')%}
+							<h2>
+								Ma note
+							</h2>
+							<div class="rate bg-transparent card p-3 mt-2">
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="user d-flex flex-row align-items-center">
+										<img src="" width="30" class="user-img rounded-circle mr-2">
+										<span>
+											<a href="{{ path('app_user_show', {'id':myRate.user.id}) }}"><h5 class="font-weight-bold text-primary">{{myRate.user.name}}</h5></a><br>
+											<small class="mt-5 font-weight-bold ">{{myRate.comment}}</small>
+										</span>
+									</div>
+									{% set difference = date(myRate.date).diff(date("now"|date("m/d/Y"))) %}
+									{% set leftDays = difference.days %}
+									{% if leftDays == 0 %}
+										<small>
+											{{ difference.i }}
+											minutes
+										</small>
+									{% elseif leftDays > 31 %}
+										<small>
+											{{ difference.m }}
+											mois
+										</small>
+									{% elseif leftDays > 365 %}
+										<small>
+											{{ difference.y }}
+											ans
+										</small>
+									{% else %}
+										<small>
+											{{ leftDays }}
+											jours
+										</small>
+									{% endif %}
+								</div>
+								<div class="action d-flex justify-content-between mt-2 align-items-center">
+									<div class="reply px-4">
+										{% if app.user %}
+										<a class="btn btn-outline-light btn-lg px-4 m-2 followButton" href="{{ path('app_rating_edit', {'id': myRate.id}) }}" role='button'>  Editer ou Supprimer</a>    
+
+											{% if app.user.admin == 1 %}
+											{% endif %}
+										{% endif %}
+									</div>
+									<div class="icons align-items-center">
+										<p>
+											{{ myRate.value|number_format(1) }}</p>
+										<i class="fa fa-check-circle-o check-icon"></i>
+									</div>
+								</div>
+							</div>
+						{% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
+							<h2>Ma note</h2><br>
+							<a class="btn btn-outline-light btn-lg px-4 followButton" href="{{ path('app_rating_new',{'id': series.id}) }}" role='button'>
+								Noter</a>
+						{% endif %}
+						{% if allRates != null %}
+							<h2 class="">
+								Les notes
+							</h2>
+							<form class="searchBar text-white d-flex flex-row align-items-center " method="get" action="{{ path('app_series_show_search',{'id':series.id} ) }}">
+								<div class="d-flex flex-column align-items-center">
+									<label class="m-2">Mots-clés commentaires :
+									</label>
+									<input class="form-control w-auto m-2" type="text" name="comment" placeholder="Mots-clés">
+								</div>
+								<div class="d-flex flex-column align-items-end mt-4">
+									<button type="submit" class="btn btn-primary mt-3 ">Recherche</button>
+								</div>
+							</form>
+							<div class="container mt-5 mb-5">
+								<div class="col-md-8">
+									{% for rate in allRates %}
+										<div class="rate bg-transparent card p-3 mt-2 w-auto h-auto">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="user d-flex flex-row align-items-center">
+													<img src="" width="30" class="user-img rounded-circle mr-2">
+													<span>
+														<a href="{{ path('app_user_show', {'id':rate.user.id}) }}"><h5 class="font-weight-bold text-primary">{{rate.user.name}}</h5></a><br>
+														<small class="font-weight-bold ">{{ rate.comment|raw }}</small>
+													</span>
+												</div>
+												{% set difference = date(rate.date).diff(date("now"|date("m/d/Y"))) %}
+												{% set leftDays = difference.days %}
+												{% if leftDays == 0 %}
+													<small>
+														{{ difference.i }}
+														minutes
+													</small>
+												{% elseif leftDays > 31 %}
+													<small>
+														{{ difference.m }}
+														mois
+													</small>
+												{% elseif leftDays > 365 %}
+													<small>
+														{{ difference.y }}
+														ans
+													</small>
+												{% else %}
+													<small>
+														{{ leftDays }}
+														jours
+													</small>
+												{% endif %}
+											</div>
+											<div class="action d-flex justify-content-between mt-2 align-items-center">
+												<div class="reply px-4">
+
+													{% if app.user %}
+														{% if app.user.admin == 1 %}
+														{% endif %}
+													{% endif %}
+												</div>
+												<div class="icons align-items-center">
+													<p>
+														{{ rate.value|number_format(1) }}</p>
+													<i class="fa fa-check-circle-o check-icon"></i>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+								</tbody>
+							</table>
+							<form class="searchBar text-white d-flex flex-row align-items-center m-5 w-auto h-auto"  method="get" action="{{ path('app_series_show', {'id': series.id})}}">
+								<div class="d-flex flex-column align-items-center">
+									<label class="m-2 w-auto" >Note :</label>
+									<select class="form-control m-2  w-auto" data-mdb-filter="true" name="rate">
+									<option value=> -- Note -- </option>
+									<option value="0"  >🌑🌑🌑🌑🌑</option>
+									<option value="0.5">🌗🌑🌑🌑🌑</option>
+									<option value="1"  >🌕🌑🌑🌑🌑</option>
+									<option value="1.5">🌕🌗🌑🌑🌑</option>
+									<option value="2"  >🌕🌕🌑🌑🌑</option>
+									<option value="2.5">🌕🌕🌗🌑🌑</option>
+									<option value="3"  >🌕🌕🌕🌑🌑</option>
+									<option value="3.5">🌕🌕🌕🌗🌑</option>
+									<option value="4"  >🌕🌕🌕🌕🌑</option>
+									<option value="4.5">🌕🌕🌕🌕🌗</option>
+									<option value="5"  >🌕🌕🌕🌕🌕</option>
+									</select>
+								</div>
+								<div class="d-flex flex-column align-items-end mt-4">
+									<button type="submit" class="btn btn-primary mt-3 ">Recherche</button>
+								</div>
+               				 </form>
+							{{ knp_pagination_render(allRates) }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<div class="action">
+			<a class="btn btn-outline-light btn-lg px-4 followButton" href="{{ path('app_series_index') }}" role='button'>
+				Retour à la liste</a>
+		</div>
+	</footer>
+
+</body>{% endblock %}

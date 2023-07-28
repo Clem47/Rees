@@ -1,0 +1,189 @@
+body {
+    max-width: 90vw;
+    margin: 0 auto;
+}
+.nav-link  {
+    color: white;
+    text-decoration: none;
+
+}
+
+.profil {
+    color : #91D7F2;
+}
+
+main {
+    margin-top: 15vh;
+}
+
+/** Series display **/
+
+.series__filter {
+    display: flex;
+    justify-content : space-between;
+    align-items: stretch;
+    column-gap: .75rem;
+    margin-bottom: 2rem;
+    padding: 2vh;
+    border-radius: .5rem;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.allGenre {
+    max-width: 330px;
+}
+
+.series__filter img {
+    border-radius: 1rem;
+}
+
+.theGenre {
+    margin: 0.2rem;
+    border : 1px solid #f8f9fa;
+}
+
+div.series__filter:hover  {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+/** Pagination **/
+
+.pag {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.searchBar {
+    margin-bottom: 2vh;
+    margin-top: 15vh;
+    margin-left: 4vh;
+}
+
+
+.allGenre {
+    max-width: 330px;
+}
+
+/** Series display **/
+.work_container {
+    display: grid;
+    grid-template-columns: repeat(5,330px) ;
+    gap : 1.8rem;
+    justify-content: center;
+}
+
+
+
+@media screen and  (max-width: 1800px){
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and  (max-width: 1200px){
+    .pagination a{
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+    main {
+        display: flex;
+    }
+    #logoSociety {
+        display: none;
+    }
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 990px){
+    .pagination {
+        display: flex ;
+        flex-wrap: wrap;
+    }
+    body {
+        font-size: 1.0rem;
+    }
+
+    .searchBar {
+        flex-direction: column;
+        margin-top: 0vh;
+        margin-left: 0vh;
+    }
+    .pagination a{
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+    main {
+        display: flex;
+    }
+    #logoSociety {
+        display: none;
+    }
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+
+
+}
+
+@media screen and (max-width: 850px){
+    body {font-size:2rem;} 
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(1,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media (max-width: 500px){
+    body {font-size:2.5rem;} /*1rem = 16px*/
+
+    .pagination a{
+        font-size: large;
+        color: white;
+        text-decoration: none;
+    }
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(1,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+/** Media queries **/
+
+
+
+
+
+
+

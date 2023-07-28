@@ -1,0 +1,45 @@
+/* Pagination container */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+/* Pagination links */
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 8px;
+    border: 1px solid #FFF;
+    border-radius: 2rem;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Current page link */
+.pagination .current {
+    color: #000;
+    background-color: #FFF;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin: 0 8px;
+    border: 1px solid #FFF;
+    border-radius: 2rem;
+}
+
+/* Disabled links */
+.pagination .disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+
+/* Next and previous links */
+.pagination .prev,
+.pagination .next {
+    font-weight: bold;
+}
+
+/* Hover effect for links */
+.pagination a:hover {
+    background-color: #eee;
+    color: #000;
+}

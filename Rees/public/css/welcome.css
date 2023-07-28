@@ -1,0 +1,282 @@
+/** header **/
+.selectWindow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.nav-link  {
+    color: white;
+    text-decoration: none;
+
+}
+li a {
+    color: white;
+    text-decoration: none;
+}
+
+a {
+    font-weight: bold;
+}
+
+.selectWindow h2 {
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.welcome {
+    color :  #91D7F2;
+    text-decoration: none;
+}
+
+/** Arrow down **/
+.scroll-down {
+    position: absolute;
+    bottom: 6%;
+    right: 9%;
+}
+
+.scroll-down i {
+    display: block;
+    padding: 12px;
+    font-size: 40px;
+    color: white;
+    background: #604174;
+    border-radius: 30px;
+    transition: all .50s ease;
+}
+
+.scroll-down i:hover {
+    transform: translateY(-5px);
+}
+
+/** Main **/
+main {
+    padding-top: 10rem;
+    display: flex;
+    width: 98vw;
+    height: 110vh;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-around;
+}
+
+
+
+main h1 {
+    font-size: 4rem;
+    color: #ffffff;
+}
+
+main h2 {
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+}
+
+.welcome,
+.societyName {
+    margin: 0 auto;
+    max-width: 950px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+
+/** Series display **/
+.work_container {
+    display: flex;
+    padding: 0 19%;
+    display: grid;
+    grid-template-columns: repeat(3, 330px);
+    gap: 1.8rem;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+
+.series__filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .75rem;
+    margin-bottom: 2rem;
+    padding: 2vh;
+    border-radius: .5rem;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+
+
+.series__filter img {
+    border-radius: 1rem;
+}
+
+
+div.series__filter:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+/** Pagination **/
+
+.pag {
+    flex-wrap: wrap;
+
+}
+
+
+
+.page,
+.first,
+.previous,
+.next,
+.last {
+    margin: 0 7%;
+}
+
+
+.current {
+    color: #604174;
+}
+
+.pagination a {
+    font-size: medium;
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+
+@media (max-width: 990px) {
+    .pagination a {
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+    body {
+        font-size: 1.0rem;
+    }
+    main {
+        display: flex;
+    }
+
+    #logoSociety {
+        display: none;
+    }
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 330px);
+        gap: 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+
+@media (max-width: 850px) {
+    body {font-size:2rem;} 
+    .work_container {
+        display: grid;
+        gap: 1.8rem;
+
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+
+@media (max-width: 500px) {
+    body {font-size:2.5rem;} /*1rem = 16px*/
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(1, 330px);
+        gap: 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .pagination a {
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+
+
+	.work_container {
+		display: grid;
+		grid-template-columns: repeat(2,330px) ;
+		gap : 1.8rem;
+		justify-content: center;
+		padding-top: 1rem;
+	}
+    main {
+        display: flex;
+    }
+
+    #logoSociety {
+        display: none;
+    }
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2, 330px);
+        gap: 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+
+@media (max-width: 850px) {
+    
+    * {
+		box-sizing: border-box;
+	}
+
+    
+    .work_container {
+		display: grid;
+		grid-template-columns: repeat(2,330px) ;
+		gap : 1.8rem;
+		justify-content: center;
+		padding-top: 1rem;
+	}
+}
+
+
+@media (max-width: 700px) {
+    .work_container {
+		display: grid;
+		grid-template-columns: repeat(1,330px) ;
+		gap : 1.8rem;
+		justify-content: center;
+		padding-top: 1rem;
+	}
+}
+
+@media (max-width: 500px) {
+    .pagination a {
+        font-size: large;
+        color: white;
+        text-decoration: none;
+    }
+    .work_container {
+		display: grid;
+		grid-template-columns: repeat(1,330px) ;
+		gap : 1.8rem;
+		justify-content: center;
+		padding-top: 1rem;
+	}
+}

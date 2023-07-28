@@ -1,0 +1,125 @@
+main {
+    margin-top: 15vh;
+}
+
+.work_container {
+    padding: 0 0;
+}
+
+.allGenre {
+    max-width: 330px;
+}
+
+/** Series display **/
+.work_container {
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(5,330px) ;
+    gap : 1.8rem;
+    justify-content: center;
+}
+
+.personnalSeries {
+    color : #91D7F2;
+}
+@media screen and  (max-width: 1800px){
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and  (max-width: 1200px){
+    .pagination a{
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+    main {
+        display: flex;
+    }
+    #logoSociety {
+        display: none;
+    }
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 990px){
+    .pagination {
+        display: flex ;
+        flex-wrap: wrap;
+    }
+    body {
+        font-size: 1.0rem;
+    }
+
+    .searchBar {
+        flex-direction: column;
+        margin-top: 0vh;
+        margin-left: 0vh;
+    }
+    .pagination a{
+        font-size: medium;
+        color: white;
+        text-decoration: none;
+    }
+    main {
+        display: flex;
+    }
+    #logoSociety {
+        display: none;
+    }
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+
+
+}
+
+@media screen and (max-width: 850px){
+    body {font-size:2rem;} 
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(1,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media (max-width: 500px){
+    body {font-size:2.5rem;} /*1rem = 16px*/
+
+    .pagination a{
+        font-size: large;
+        color: white;
+        text-decoration: none;
+    }
+
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(1,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+/** Media quer

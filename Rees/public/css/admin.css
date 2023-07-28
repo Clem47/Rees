@@ -1,0 +1,58 @@
+* {
+    border: none;
+    color: white;
+}
+
+
+.nav-link  {
+    color: white;
+    text-decoration: none;
+
+}
+li a{
+    color: white;
+    text-decoration: none;
+}
+
+.ListUsers{
+    color :  #91D7F2;
+}
+
+h5 {
+    color :  #91D7F2;
+}
+
+
+
+
+
+a {
+    display: flex;
+}
+
+.inlineButton {
+    display: flex;
+}
+
+/** Main **/
+
+main {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.Allinfo__filter {
+    width: auto;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+/** SearchBar **/
+
+.searchBar {
+    margin-top: 12vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+

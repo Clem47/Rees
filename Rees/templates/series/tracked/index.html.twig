@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes series{% endblock %}
+
+{% block stylesheets %}
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{{ asset('/css/mySeries.css') }}" type="text/css" rel="stylesheet">  
+    <link href="{{ asset('/css/paginationSeries.css') }}" type="text/css" rel="stylesheet"> 
+
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}   
+        <h1 class=" m-5  text-white" style="padding-top:10rem;"> Séries commencées </h1> 
+        <div id="series" class="m-5 work_container  grid " style="padding-top:10rem;"> 
+            {% for serieStart in start %}
+                <div class=" d-flex flex-column">
+                    <td class="bg-transparent">  
+                        <div class="series__filter AllPoster"> 
+                            <a href="{{ path('app_series_show', {'id': serieStart.id}) }}">
+                                <img src="{{ path('app_poster',{'id':serieStart.id }) }}">
+                            </a>
+                        </div>
+                        <div class="allGenre btn-group d-flex flex-row justify-content-center flex-wrap ">
+                            {% for genre in serieStart.genre %}
+                                {% if loop.index <= 4 %}
+                                    <p class="btn btn-outline-light btn-sm theGenre">{{ genre}}</p>    
+                                {% endif %}   
+                            {% endfor %}
+                        </div>
+                    </td>
+                </div>
+            {% endfor %}
+            
+        </div>
+        {{ knp_pagination_render(start) }}
+        <h1 class="text-white" style="padding-top:10rem;"> Séries Finies </h1> 
+        <div id="series" class="work_container container grid " style="padding-top:10rem;"> 
+            {% for serieComplete in complete %}
+                <div class=" d-flex flex-column">
+                    <td> 
+                        <div class="series__filter AllPoster"> 
+                            <a href="{{ path('app_series_show', {'id': serieComplete.id}) }}">
+                                <img src="{{ path('app_poster',{'id':serieComplete.id }) }}">
+                            </a>
+                        </div>
+                        <div class="allGenre btn-group d-flex flex-row justify-content-evenly flex-wrap ">
+                            {% for genre in serieComplete.genre %}
+                                {% if loop.index <= 4 %}
+                                    <p class="btn btn-outline-light btn-sm theGenre">{{ genre}}</p>    
+                                {% endif %}   
+                            {% endfor %}
+                        </div>
+                    </td>
+
+                </div>
+            {% endfor %}
+            
+        </div>
+        {{ knp_pagination_render(complete) }}
+        <h1 class="text-white" style="padding-top:10rem;"> Ma watch list </h1> 
+        <div id="series" class="work_container container grid " style="padding-top:10rem;"> 
+            {% for serieLike in likes %}
+                <div class="  d-block p-2  text-white">
+                    <td> 
+                        <div class="series__filter AllPoster"> 
+                            <a href="{{ path('app_series_show', {'id': serieLike.id}) }}">
+                                <img src="{{ path('app_poster',{'id':serieLike.id }) }}">
+                            </a>
+                        </div>
+                        <div class="allGenre btn-group d-flex flex-row justify-content-evenly flex-wrap ">
+                            {% for genre in serieLike.genre %}
+                                {% if loop.index <= 4 %}
+                                    <p class="btn btn-outline-light btn-sm theGenre">{{ genre}}</p>    
+                                {% endif %}   
+                            {% endfor %}
+                        </div>
+                    </td>
+                </div>
+            {% endfor %}
+        </div>
+        {{ knp_pagination_render(likes) }}
+{% endblock %}

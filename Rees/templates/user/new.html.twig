@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    {% if app.user.admin ==1 %}    
+        <h1>Create new User</h1>
+        {{ include('user/_form.html.twig') }}
+        <a href="{{ path('app_admin') }}">back to list</a>
+    {% else %}
+        <main class="h-100 m-5 d-flex align-items-center">
+            <h1> ⚠️ ERREUR  :  Vous n'êtes pas administrateur ⚠️</h1>
+        </main >
+    {% endif %}
+{% endblock %}

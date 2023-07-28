@@ -1,0 +1,300 @@
+*  {
+    color: white;
+}
+
+.nav-link  {
+    color: white;
+    text-decoration: none;
+
+}
+main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+li a{
+    color: white;
+    text-decoration: none;
+}
+
+tr,td {
+    display: flex;
+    margin: 1%;
+    border:0;
+}
+
+td,  th {
+    border : 0;
+    min-width: 20vh;
+}
+
+.ouais {
+    background-color: transparent;
+}
+
+footer {
+    display: flex;
+    margin-bottom: 1%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.action {
+
+    margin: 0 2%;
+}
+
+
+.action a{
+    color: white;
+    text-decoration: none;
+}
+
+.click {
+    background-color: #91D7F2;
+    margin: 0.5vw;
+    border-radius: 30px;
+}
+.titleTxt {
+    display: flex;
+    font-size: 47px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all .55s ease;
+    color: #91D7F2;
+    z-index: 1000;
+    
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color : white;
+}
+.LineOne {
+    display: flex;
+}
+
+
+
+h3 {
+    color :  #91D7F2;
+
+}
+
+.firstPart {
+    flex : 1;
+}
+.secondPart {
+    flex : 4;
+}
+
+
+.clickInfo {
+    border-radius: 30px;
+    height: 7vh;
+}
+
+
+.ouais {
+    height: 10vw;
+    width: 10vw;
+}
+
+
+.followButton {
+    border: solid 2px #FFFFFF;
+}
+
+
+.card {
+    
+    border: none;
+    box-shadow: 0 0.1rem 1rem rgba(190, 124, 255, 0.64);
+    border-radius: 4px;
+}
+
+
+.dots{
+
+    height: 4px;
+  width: 4px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badge{
+
+        padding: 7px;
+        padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img{
+
+    margin-top: 4px;
+}
+
+.check-icon{
+
+    font-size: 17px;
+    color: #c3bfbf;
+    top: 1px;
+    position: relative;
+    margin-left: 3px;
+}
+
+.form-check-input{
+    margin-top: 6px;
+    margin-left: -24px !important;
+    cursor: pointer;
+}
+
+
+.form-check-input:focus{
+    box-shadow: none;
+}
+
+
+.icons i{
+
+    margin-left: 8px;
+}
+.reply{
+
+    margin-left: 12px;
+}
+
+.reply small{
+
+    color: #b7b4b4;
+
+}
+
+
+.reply small:hover{
+
+    color: green;
+    cursor: pointer;
+
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  
+
+@media (max-width: 864px) {  
+    .click {
+       max-width: 75%;
+    } /*1rem = 16px*/
+  }
+
+  @media (max-width: 664px) {  
+    .click {
+       max-width: 50%;
+    } /*1rem = 16px*/
+  }
+
+
+  @media screen and  (max-width: 1800px){
+    
+    .work_container {
+        display: grid;
+        grid-template-columns: repeat(2,330px) ;
+        gap : 1.8rem;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+
+
+@media screen and (max-width: 990px){
+    body {
+        font-size: 1.0rem;
+    }
+    .LineOne {
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+}
+
+@media screen and (max-width: 850px){
+    body {font-size:1.5rem;} 
+
+}
+
+@media (max-width: 500px){
+    
+    body {font-size:1.5rem;} /*1rem = 16px*/
+
+
+}
+

@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    width: 98vw;
+    height: 100vh;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-around;
+    font-size: x-large;
+    color: white;
+}
+li a{
+    color: white;
+    text-decoration: none;
+}
+
+.comment {
+    padding: 25px;
+    height : auto;
+    width: 500px;
+    margin: 1rem;
+    border-radius: 2.5rem !important;
+    box-shadow: 0 0.1rem 1rem rgba(190, 124, 255, 0.64);
+}
+
+
+button {
+    margin: 2%;
+}

@@ -1,0 +1,84 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>592</x><y>40</y><w>152</w><h>120</h></coordinates><panel_attributes>user
+--
+__id: int(11)                            &lt;&lt;pk,M&gt;&gt;__
+name : varchar(255)         &lt;&lt;M&gt;&gt;
+email : varchar(255)         &lt;&lt;pk,M&gt;&gt;
+password : varchar(255)  &lt;&lt;M&gt;&gt;
+register_date : datetime
+admin : tinyint(1)              &lt;&lt;M&gt;&gt;
+user_id : varchar(255)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>848</x><y>80</y><w>120</w><h>48</h></coordinates><panel_attributes>user_episode</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>824</x><y>224</y><w>144</w><h>96</h></coordinates><panel_attributes>episode
+--
+__id: int(11)                        &lt;&lt;pk,M&gt;&gt;__
+title : varchar(255)        &lt;&lt;M&gt;&gt;
+date : date
+imdb : varchar(255)      &lt;&lt;M&gt;&gt;
+imdbrating : double
+number : int(11)            &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>312</x><y>64</y><w>88</w><h>32</h></coordinates><panel_attributes>user_country</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>248</x><y>184</y><w>120</w><h>48</h></coordinates><panel_attributes>user_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>872</x><y>496</y><w>88</w><h>32</h></coordinates><panel_attributes>episode_season</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>664</x><y>488</y><w>136</w><h>56</h></coordinates><panel_attributes>season
+--
+__id: int(11)                     &lt;&lt;pk,M&gt;&gt;__
+number : int(11)         &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>248</x><y>480</y><w>200</w><h>152</h></coordinates><panel_attributes>series
+--
+__id: int(11)                                            &lt;&lt;pk,M&gt;&gt;__
+title : varchar(255)                            &lt;&lt;M&gt;&gt;
+plot : longtext
+imdb : varchar(255)	                         &lt;&lt;fk,M&gt;&gt;
+poster : longblob
+director : varchar(255)
+youtube_trailer : varchar(255)
+awards : longtext
+year_start : int(11)
+year_end : int(11)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>512</x><y>496</y><w>88</w><h>32</h></coordinates><panel_attributes>season_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>512</x><y>584</y><w>88</w><h>32</h></coordinates><panel_attributes>actor_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>664</x><y>568</y><w>136</w><h>56</h></coordinates><panel_attributes>actor
+--
+__id: int(11)                     &lt;&lt;pk,M&gt;&gt;__
+name : varchar(255)  &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>128</y><w>248</w><h>96</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;100;290;10</additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>224</y><w>40</w><h>272</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;320;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>392</x><y>64</y><w>216</w><h>32</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;20;250;20</additional_attributes></element><element><id>Relation</id><coordinates><x>792</x><y>496</y><w>96</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;20;100;20</additional_attributes></element><element><id>Relation</id><coordinates><x>904</x><y>312</y><w>32</w><h>200</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>88</y><w>128</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>904</x><y>120</y><w>40</w><h>120</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>592</x><y>496</y><w>88</w><h>32</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>496</y><w>88</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>584</y><w>88</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>Relation</id><coordinates><x>592</x><y>584</y><w>88</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>312</x><y>720</y><w>88</w><h>32</h></coordinates><panel_attributes>genre_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>624</y><w>40</w><h>112</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>744</y><w>40</w><h>112</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>264</x><y>840</y><w>160</w><h>56</h></coordinates><panel_attributes>genre
+--
+__id: int(11)                          &lt;&lt;pk,M&gt;&gt;__
+name : varchar(255)       &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>0</x><y>736</y><w>208</w><h>32</h></coordinates><panel_attributes>external_rating__external_rating_source</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>672</y><w>32</w><h>80</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>760</y><w>40</w><h>96</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>40</x><y>504</y><w>128</w><h>32</h></coordinates><panel_attributes>external_rating__series</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>504</y><w>104</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>528</y><w>32</w><h>96</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>32</x><y>608</y><w>152</w><h>72</h></coordinates><panel_attributes>external_rating
+--
+__id: int(11)                          &lt;&lt;pk,M&gt;&gt;__
+value : varchar(255)       &lt;&lt;M&gt;&gt;
+votes : int(11)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>32</x><y>840</y><w>152</w><h>56</h></coordinates><panel_attributes>external_rating_source
+--
+__id: int(11)                           &lt;&lt;pk,M&gt;&gt;__
+name : varchar(255)        &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>32</x><y>320</y><w>128</w><h>32</h></coordinates><panel_attributes>country_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>88</x><y>112</y><w>40</w><h>224</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;260;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>88</x><y>344</y><w>176</w><h>160</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;10;200;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>32</x><y>64</y><w>152</w><h>56</h></coordinates><panel_attributes>country
+--
+__id: int(11)                          &lt;&lt;pk,M&gt;&gt;__
+name : varchar(255)       &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>176</x><y>64</y><w>152</w><h>32</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;20;170;20</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>360</x><y>344</y><w>88</w><h>32</h></coordinates><panel_attributes>rating_series</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>640</x><y>232</y><w>88</w><h>32</h></coordinates><panel_attributes>user_rating</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>328</y><w>144</w><h>72</h></coordinates><panel_attributes>rating
+--
+__id: int(11)                       &lt;&lt;pk,M&gt;&gt;__
+value : double               &lt;&lt;M&gt;&gt;
+comment : longtext	    &lt;&lt;M&gt;&gt;
+date : datetime             &lt;&lt;M&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>392</x><y>368</y><w>40</w><h>128</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>344</y><w>176</w><h>32</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;20;200;20</additional_attributes></element><element><id>Relation</id><coordinates><x>672</x><y>256</y><w>32</w><h>88</h></coordinates><panel_attributes>lt=-
+1,1</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>672</x><y>152</y><w>40</w><h>96</h></coordinates><panel_attributes>lt=-
+0,n</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element></diagram>

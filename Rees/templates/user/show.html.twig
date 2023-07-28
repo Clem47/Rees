@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+{% block stylesheets %}
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{{ asset('/css/paginationSeries.css') }}" type="text/css" rel="stylesheet">  
+    <link href="{{ asset('/css/myProfil.css') }}" type="text/css" rel="stylesheet">   
+
+{% endblock %}
+{% block body %}
+ {{ parent()  }}
+ <main class="d-flex flex-wrap justify-content-center text-white" >
+    <div class="info d-flex m-5 flex-column align-items-center" >
+        <div class="LineOne d-flex flex-column flex-wrap mt-5  ">
+            <h1 class="mt-5"> {{ user.name }} </h1>  
+            {% if user.registerDate  %}
+                <h2>RegisterDate</h2>
+                <h3>{{ user.registerDate ? user.registerDate|date('Y-m-d H:i:s') : '' }}</h3>
+            {% endif %}
+            {% if rates != null %}
+                <h1>Ses commentaires</h1>
+                    <div class="container mt-5">
+								<div class="col-md-8">
+                        {% for rate in rates %}
+										<div class="rate bg-transparent card p-3 mt-2 w-auto h-auto">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="user d-flex flex-row align-items-center">
+													<img src="" width="30" class="user-img rounded-circle mr-2">
+													<span>
+														<a href="{{ path('app_user_show', {'id':rate.user.id}) }}"><h5 class="font-weight-bold text-primary">{{rate.user.name}}</h5></a><br>
+														<small class="font-weight-bold ">{{rate.comment}}</small>
+													</span>
+												</div>
+												{% set difference = date(rate.date).diff(date("now"|date("m/d/Y"))) %}
+												{% set leftDays = difference.days %}
+												{% if leftDays == 0 %}
+													<small>
+														{{ difference.i }}
+														minutes
+													</small>
+												{% elseif leftDays > 31 %}
+													<small>
+														{{ difference.m }}
+														mois
+													</small>
+												{% elseif leftDays > 365 %}
+													<small>
+														{{ difference.y }}
+														ans
+													</small>
+												{% else %}
+													<small>
+														{{ leftDays }}
+														jours
+													</small>
+												{% endif %}
+											</div>
+											<div class="action d-flex justify-content-between mt-2 align-items-center">
+												<div class="reply px-4">
+													{% if app.user %}
+														{% if app.user.admin == 1 %}
+															
+														{% endif %}
+													{% endif %}
+												</div>
+												<div class="icons align-items-center">
+													<p>
+														{{ rate.value|number_format(1) }}</p>
+													<i class="fa fa-check-circle-o check-icon"></i>
+												</div>
+											</div>
+										</div>
+                        {% endfor %}
+                        {{ knp_pagination_render(rates) }}
+ 
+                <form class="searchBar text-white d-flex flex-row align-items-center "  method="get" action="{{ path('app_user_show', {'id': user.id})}}">
+                    <div class="d-flex flex-column align-items-center">
+                        <label class="m-2 w-auto" >Trie :</label>
+                        <select class="form-control m-2  w-auto" data-mdb-filter="true" name="rate">
+                        <option value=> -- Note -- </option>
+                        <option value="0"  >🌑🌑🌑🌑🌑</option>
+                        <option value="0.5">🌗🌑🌑🌑🌑</option>
+                        <option value="1"  >🌕🌑🌑🌑🌑</option>
+                        <option value="1.5">🌕🌗🌑🌑🌑</option>
+                        <option value="2"  >🌕🌕🌑🌑🌑</option>
+                        <option value="2.5">🌕🌕🌗🌑🌑</option>
+                        <option value="3"  >🌕🌕🌕🌑🌑</option>
+                        <option value="3.5">🌕🌕🌕🌗🌑</option>
+                        <option value="4"  >🌕🌕🌕🌕🌑</option>
+                        <option value="4.5">🌕🌕🌕🌕🌗</option>
+                        <option value="5"  >🌕🌕🌕🌕🌕</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column align-items-end mt-4">
+                        <button type="submit" class="btn btn-primary mt-3 ">Recherche</button>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    {% if user.series != null %}
+        <h1>Ses Séries</h1>
+        <div id="series" class="work_container grid " style="padding-top:10rem;"> 
+            {% for serie in series %}
+                <div class=" d-flex flex-column text-white">
+                    <td> 
+                        <div class="series__filter AllPoster"> 
+                            <a href="{{ path('app_series_show', {'id': serie.id}) }}">
+                                <img src="{{ path('app_poster',{'id':serie.id }) }}">
+                            </a>
+                        </div>
+                        <div class="allGenre btn-group d-flex flex-row justify-content-evenly flex-wrap ">
+                            {% for genre in serie.genre %}
+                                {% if loop.index <= 4 %}
+                                    <p class="btn-outline-light btn btn-sm theGenre">{{ genre}}</p>    
+                                {% endif %}   
+                            {% endfor %}
+                        </div>
+                    </td>
+                </div>
+            {% endfor %}
+        </div>
+        {{ knp_pagination_render(series) }}
+    {% endif %}
+{% endblock %}

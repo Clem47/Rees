@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes episodes{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    <link href="{{ asset('/css/admin.css') }}" type="text/css" rel="stylesheet">  
+    <link href="{{ asset('/css/episode.css') }}" type="text/css" rel="stylesheet">  
+    <link href="{{ asset('/css/pagination.css') }}" type="text/css" rel="stylesheet"> 
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}    
+    <main class="min-vh-100 d-flex flex-column align-items-center "> 
+         <table class="table table-striped">
+                    <thead class="thead-light">
+                        <tr class="border-0">
+                            <th class="border-0 min-vw-20">Titre  </th>
+                            <th class="border-0 ">Saison</th>
+                            <th class="border-0 min-vw-20">Episode</th>
+                            <th class="border-0 min-vw-20">Titre épisode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if episodes   %}
+                      {% for episode in episodes %}
+                        <tr class="bg-transparent">
+                        {% if  episode.season  %}
+                            {% if  episode.season.series.title  %}
+                                <td class="border-0 w-25"> 
+                                    <a class="decoration-none text-white" href="{{ path('app_series_show', {'id': episode.season.series.id}) }}">  
+                                        {{ episode.season.series.title }}    
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td class="border-0 min-vw-20"> N/A </td>   
+                            {% endif %}
+                            {% if   episode.season.number %}
+                            <td class="email border-0 w-60">{{ episode.season.number }}</td>
+                            {% else %}
+                            <td class="border-0 min-vw-20"> N/A </td>   
+                            {% endif %}
+                            {% if episode.number %}
+                                <td class="border-0 min-vw-20">{{ episode.number }}</td>
+                            {% else %}
+                                <td class="border-0 min-vw-20"> N/A </td>   
+                            {% endif %}
+                            {% if episode.title %}
+                                <td class="border-0 min-vw-20">{{ episode.title }}</td>
+                            {% else %}
+                                <td class="border-0 min-vw-20"> N/A </td>   
+                            {% endif %}
+                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="8">Aucun épisode trouvé</td>
+                        </tr>
+                    {% endif %}
+                    
+                  
+                    </tbody>
+                </table>
+                {{ knp_pagination_render(episodes) }}
+        </div>
+    </main>
+{% endblock %}
+

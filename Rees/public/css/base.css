@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    background: linear-gradient(#604174, #302336);
+    font-family: Verdana, sans-serif;
+    min-height: 95vh;
+}
+
+.nav {
+    max-height: 10vh;
+}
+
+
+a {
+    font-weight: bold;
+}
+
+
+/** header **/
+.itemList {
+    list-style-type: none;
+    color: white;
+
+}
+
+li a {
+    text-decoration: none;
+    color: white
+}
+
+
+
+nav {
+    background-color: rgba(63, 43, 77, 0.6);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1% 0.5%;
+    margin: 0, 0.5%;
+    color: white;
+}
+
+/** ScrollBar **/
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+
+}
+
+.scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 0;
+    opacity: 0;
+
+}
+
+
+.clickScrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 100px;
+}
+
+.nav-link  {
+    color: white;
+    text-decoration: none;
+
+}
+/** Media queries **/
+@media (max-width: 990px) {
+    .nav {
+        max-height: 50vh;
+    }
+   .searchBar {
+    padding: 10vh;
+   }
+
+    .pagination {
+        font-size: small;
+    }
+}
+
+.rees {
+    padding: 9px 15px;
+}
+
+
+/** Media queries **/
+@media (min-width: 544px) {  
+    body {font-size:1.5rem;} /*1rem = 16px*/
+  }
+   
+  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+  @media (min-width: 768px) {  
+    body {font-size:2rem;} 
+
+  }
+   
+  /* Large devices (desktops, 992px and up) */
+  @media (max-width: 992px) { 
+    body {font-size:2.5rem;} /*1rem = 16px*/
+  }
+   
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {  
+    body {font-size:3rem;} /*1rem = 16px*/    
+  }

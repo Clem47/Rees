@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Bienvenue{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+		<link href="{{ asset('/css/base.css') }}" type="text/css" rel="stylesheet">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+
+			<div class="scrollbar"></div>
+			<div class="clickScrollbar"></div>
+			<nav class="nav navbar navbar-expand-lg  bg-transparence position-fixed">
+				<a class="navbar-brand text-white" href="{{ path('app_welcome')}}">Rees</a>
+				<button style=" background-color: transparent;" class="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span  style ="color: white;" class="navbar-toggler-icon ">     <i class="fas fa-bars" style="color: white;"></i> </span>
+				</button>
+				<div class=" collapse navbar-collapse " id="navbarSupportedContent">
+					<ul class="navbar-nav m-5 ml-auto text-center  justify-content-center">
+						{% if app.user %}
+							{% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+								<li class="nav-item active m-1 text-center">
+									<a class=" text-end ComeBackAdmin nav-link  text-white  text-decoration-none" href="{{ impersonation_exit_path(path('app_welcome')) }}">
+									Revenir en administrateur
+									</a>
+								</li>
+							{% endif %}
+							<li class="nav-item active m-1">
+								<a  href="{{ path('app_welcome')}}" class="welcome nav-link  text-decoration-none">
+									Accueil
+								</a>
+							</li>
+							<li class="nav-item active m-1">
+								<a  href="{{ path('app_user_show', {'id' : app.user.id} )}}" class="profil nav-link  text-decoration-none">
+									Mon profil
+								</a>
+							</li>
+							{% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_PREVIOUS_ADMIN') %}
+								<li class="nav-item active  m-1">
+									<a href="{{ path('app_admin')}}" class="ListUsers nav-link  text-decoration-none ">
+										Utilisateurs
+									</a>
+								</li>
+							{% endif %}
+								<li class="nav-item active m-1" >
+									<a  href="{{ path('app_series_index')}}" class="nav-link series   text-decoration-none">
+											Séries
+									</a>
+								</li>
+								<li class="nav-item active m-1" >
+									<a href="{{ path('app_episode_tracked')}}" class="personalEpisodes nav-link  text-decoration-none ">
+										Mes épisodes
+									</a>
+								</li>
+								<li class="nav-item active m-1">
+									<a  href="{{ path('app_series_tracked')}}" class="personnalSeries  nav-link text-decoration-none ">
+											Mes séries</a>
+								</li>
+								<li class="nav-item active m-1">
+									<a  href="{{ path('app_logout') }} " class="logout nav-link  text-decoration-none ">Déconnexion</a>
+								</li>
+						{% else %}
+							<li class="nav-item active m-1">
+								<a  href="{{ path('app_welcome')}}" class="welcome nav-link  text-decoration-none">
+									Accueil
+								</a>
+							</li>
+							<li class="nav-item active m-1">
+								<a  href="{{ path('app_series_index')}}" class=" series  nav-link  text-decoration-none">
+									Les séries
+								</a>
+							</li>
+							<li class="nav-item active m-1"> 
+								<a  href="{{ path('app_register') }}" class="registration nav-link  text-decoration-none">Inscription</a>
+							</li>
+							<li class="nav-item active m-1">
+								<a   href="{{ path('app_login') }}" class="login nav-link   text-decoration-none ">Connexion</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+			{% endblock %}
+		</body>
+</html>
